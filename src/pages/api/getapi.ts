@@ -9,6 +9,9 @@ export default async function handler(
   res: NextApiResponse
 ) {
  await Middleware(req, res);
+ res.setHeader('Access-Control-Allow-Origin', '*');
+ res.setHeader('Access-Control-Allow-Methods', 'GET');
+ res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   if (req.method === "GET") {
     const { url } = req.query;
     await Middleware(req, res);
