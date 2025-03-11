@@ -26,7 +26,7 @@ const Home = () => {
         setError('Failed to download video');
       }
     } catch (error) {
-      setError('An error occurred while downloading');
+      setError(error as string);
     }
   };
 
