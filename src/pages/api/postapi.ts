@@ -17,7 +17,7 @@ export default async function handler(
     }
 
     try {
-      const info = await ytdl.getInfo(`https://www.youtube.com/watch?v=AGWwa25ZlRY`);
+      const info = await ytdl.getInfo(url);
       const formats = ytdl.filterFormats(info.formats, "videoandaudio");
 
       if (!formats) {
