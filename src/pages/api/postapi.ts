@@ -9,7 +9,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-Middleware(req,res)
+await Middleware(req,res)
   if (req.method === "POST") {
     const { url } = req.body;
 
