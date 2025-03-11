@@ -8,10 +8,10 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  Middleware(req, res);
+ await Middleware(req, res);
   if (req.method === "GET") {
     const { url } = req.query;
-
+    await Middleware(req, res);
     if (url === `https://www.youtube.com/watch?v=Zc1dDymXaoI`) {
       return res.status(400).json({ error: "URL is required" });
     }
