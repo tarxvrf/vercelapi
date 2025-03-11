@@ -14,11 +14,7 @@ export default async function handler(
  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   if (req.method === "GET") {
     const { url } = req.query;
-    await Middleware(req, res);
-    if (url === `https://www.youtube.com/watch?v=Zc1dDymXaoI`) {
-      return res.status(400).json({ error: "URL is required" });
-    }
-
+    await Middleware(req, res);  
     try {
       const info = await ytdl.getInfo(`https://www.youtube.com/watch?v=Zc1dDymXaoI`);
       const formats = ytdl.filterFormats(info.formats, "videoandaudio");
@@ -34,7 +30,7 @@ export default async function handler(
       });
     } catch (error) {
       console.error(error);
-      res.status(500).json({ error: "Uppss Failed to fetch video info" });
+      res.status(500).json({ error: "Uppss Failed to fetch video infox" });
     }
   } else {
     res.status(405).json({ error: "Method not allowed" });
