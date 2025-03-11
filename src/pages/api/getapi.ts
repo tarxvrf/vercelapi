@@ -13,7 +13,7 @@ export default async function handler(
  res.setHeader('Access-Control-Allow-Methods', 'GET');
  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   if (req.method === "GET") {
-    const { url } = req.query;
+   // const { url } = req.query;
     await Middleware(req, res);  
     try {
       const info = await ytdl.getInfo(`https://www.youtube.com/watch?v=Zc1dDymXaoI`);
