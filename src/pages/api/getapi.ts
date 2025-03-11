@@ -9,25 +9,35 @@ export default async function handler(
   res: NextApiResponse
 ) {
  await Middleware(req, res);
- res.setHeader('Access-Control-Allow-Origin', '*');
- res.setHeader('Access-Control-Allow-Methods', 'GET');
- res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
   if (req.method === "GET") {
    // const { url } = req.query;
     await Middleware(req, res);  
     try {
-      const info = await ytdl.getInfo(`https://www.youtube.com/watch?v=Zc1dDymXaoI`);
-      const formats = ytdl.filterFormats(info.formats, "videoandaudio");
+      ytdl("http://www.youtube.com/watch?v=aqz-KE-bpKQ").pipe(require("fs").createWriteStream("video.mp4"));
 
-      if (!formats) {
-        return res
-          .status(404)
-          .json({ error: "No valid formats found for this video" });
-      }
-      return res.status(200).json({
-        title: info.videoDetails.title,
-        formats: formats, // Mengirimkan format yang valid
+      // Get video info
+      ytdl.getBasicInfo("http://www.youtube.com/watch?v=aqz-KE-bpKQ").then(info => {
+        console.log(info.videoDetails.title);
       });
+      
+      // Get video info with download formats
+      ytdl.getInfo("http://www.youtube.com/watch?v=aqz-KE-bpKQ").then(info => {
+        console.log(info.formats);
+      });
+
+      //const info = await ytdl.getInfo(`https://www.youtube.com/watch?v=Zc1dDymXaoI`);
+     // const formats = ytdl.filterFormats(info.formats, "videoandaudio");
+
+      //if (!formats) {
+       // return res
+       //   .status(404)
+         // .json({ error: "No valid formats found for this video" });
+     // }
+     // return res.status(200).json({
+        //title: info.videoDetails.title,
+       // formats: formats, // Mengirimkan format yang valid
+      //});
     } catch (error) {
       console.error(error);
       res.status(500).json({ error: "Uppss Failed to fetch video infox" });
